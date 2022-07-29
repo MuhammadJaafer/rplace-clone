@@ -7,6 +7,7 @@ function App() {
   const [currentColor, setCurrentColor] = useState();
   return (
     <div className="App">
+      <h1 className="title">r/Place Clone</h1>
       <Canvas currentColor={currentColor}></Canvas>
       <ColorPicker
         setCurrentColor={setCurrentColor}
