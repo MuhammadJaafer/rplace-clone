@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useAppContext } from "../hooks/useAppContext";
 
-export default function Pixel({ _color, i, currentColor }) {
+export default function Pixel({ _color, i }) {
   const [color, setColor] = useState(_color);
   const [index, setIndex] = useState(i);
+  const { currentColor } = useAppContext();
   const changeColor = (e) => {
     e.preventDefault();
     setColor(currentColor);

@@ -1,11 +1,11 @@
-import { colors } from "../data/Data";
-
-export default function ColorPicker({ setCurrentColor, currentColor }) {
+import { useAppContext } from "../hooks/useAppContext";
+export default function ColorPicker() {
+  const { currentColor, colors, dispatch } = useAppContext();
   return (
     <div className="color-picker">
       {colors.map((c, i) => (
         <div
-          onClick={() => setCurrentColor(c)}
+          onClick={() => dispatch({ type: "CHANGE_CURRENT_COLOR", payload: c })}
           key={i}
           className={`color ${currentColor === c ? "active" : ""}`}
           style={{ background: c }}

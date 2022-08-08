@@ -2,29 +2,23 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Canvas from "./components/Canvas";
 import ColorPicker from "./components/ColorPicker";
-
+import Popup from "./components/Popup";
+import { useAppContext } from "./hooks/useAppContext";
 function App() {
-  const [currentColor, setCurrentColor] = useState();
-  const [ip, setip] = useState(null);
-  useEffect(() => {
-    fetch(
-      "https://ipgeolocation.abstractapi.com/v1/?api_key=5641164e32384fae90647be10109bebf"
-    ).then((res) => {
-      res.json().then((data) => {
-        setip(data.ip_address);
-      });
-    });
-  }, []);
+  const { user, authIsReady } = useAppContext();
   return (
-    <div className="App">
-      <h1 className="title">r/Place Clone</h1>
-      <Canvas currentColor={currentColor}></Canvas>
-      <ColorPicker
-        setCurrentColor={setCurrentColor}
-        currentColor={currentColor}
-      />
-      <p className="ip">{ip}</p>
-    </div>
+    authIsReady && (
+      <div className="App">
+        <h1 className="title">r/Place Clone</h1>
+        {user && (
+          <>
+            <Canvas />
+            <ColorPicker />
+          </>
+        )}
+        <Popup />
+      </div>
+    )
   );
 }
 
